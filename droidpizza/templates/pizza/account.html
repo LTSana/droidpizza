@@ -1,0 +1,67 @@
+{% extends 'pizza/layout.html' %}
+{% load staticfiles %}
+
+{% block title %}
+	account
+{% endblock %}
+
+{% block main %}
+	<script src="{% static 'pizza/js/account.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'pizza/css/account.css' %}"/>
+
+	<!-- Custom fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Quantico&display=swap" rel="stylesheet">
+
+	<div class="account_container">
+		{% if messages.msgn == 0 %}
+			<p class="messages0"><span>{{messages.msg}}</span></p>
+		{% elif messages.msgn == 1 %}
+			<p class="messages1"><span>{{messages.msg}}</span></p>
+		{% elif messages.msgn == 2 %}
+			<p class="messages2"><span>{{messages.msg}}</span></p>
+		{% elif messages.msgn == 3 %}
+			<p class="messages3"><span>{{messages.msg}}</span></p>
+		{% elif messages.msgn == 4 %}
+			<p class="messages4"><span>{{messages.msg}}</span></p>
+		{% endif %}
+		<div class="account_content">
+			<p>Username: <span class="focus_content">{{username}}</span></p>
+			<p>Name: <span class="focus_content">{{first_name}} {{last_name}}</span></p>
+			<p>E-mail: <span class="focus_content">{{email}}</span></p>
+			<p>Total orders made: <span class="focus_content">{{amount_of_orders}}</span></p>
+			<p>Total orders waiting: <span class="focus_content">{{amount_of_waiting_orders}}</span></p>
+			<p>Total orders done: <span class="focus_content">{{amount_of_done_orders}}</span></p>
+			<p>Total orders denied: <span class="focus_content">{{amount_of_denied_orders}}</span></p>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cpwdModal">
+				Change Password
+			</button>
+				
+			<!-- Modal -->
+			<div class="modal fade" id="cpwdModal" tabindex="-1" role="dialog" aria-labelledby="cpwdModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="cpwdModalLabel">Change Password</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form action="/account/cpassword" method="POST">
+							{% csrf_token %}
+							<div class="modal-body">
+									<input type="password" name="opwd" id="opwd" minlength="8" maxlength="64" placeholder="Old Password" class="form-control" required>
+									<input type="password" name="npwd" id="npwd" minlength="8" maxlength="64" placeholder="New Password (8-64)" class="form-control" required>
+									<input type="password" name="cpwd" id="cpwd" minlength="8" maxlength="64" placeholder="Confirm Password" class="form-control" required>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="submit" id="sbtn" class="btn btn-primary" disabled>Save changes</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

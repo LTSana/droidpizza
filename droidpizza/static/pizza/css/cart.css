@@ -1,0 +1,65 @@
+/* Styling for Cart page */
+body {
+  background-color: rgba(189, 167, 95, 0.898); }
+
+.nav {
+  margin-left: 5%;
+  margin-top: 1%; }
+
+.badge_cart {
+  margin-top: 0.5%;
+  margin-left: 5%;
+  font-size: 110%; }
+
+.cart_card {
+  display: box;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 5%;
+  margin-right: 50%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  background-color: #fbff0a;
+  color: black; }
+  .cart_card .card_content {
+    margin-left: 2%; }
+    .cart_card .card_content .pizza_build {
+      margin-top: -2%; }
+    .cart_card .card_content .cart_id {
+      font-family: 'Fredoka One', cursive; }
+    .cart_card .card_content .item_detail {
+      font-weight: bold; }
+    .cart_card .card_content .splitter_top {
+      display: box;
+      padding-bottom: 1%;
+      margin-right: 0%;
+      margin-left: -2%;
+      margin-top: -2%;
+      background-color: red; }
+    .cart_card .card_content .splitter_bottom {
+      display: box;
+      padding-bottom: 1%;
+      margin-right: 2%;
+      margin-top: -2%;
+      background-color: gray; }
+    .cart_card .card_content .total_value_Q {
+      margin-top: -6%;
+      margin-left: 15%; }
+    .cart_card .card_content #status_btn {
+      background-color: white; }
+    .cart_card .card_content .btn-primary {
+      background-color: rgba(0, 0, 0, 0.564); }
+    .cart_card .card_content .btn-primary:hover {
+      background-color: black; }
+    .cart_card .card_content .btn-danger {
+      background-color: rgba(255, 102, 102, 0.564); }
+    .cart_card .card_content .btn-danger:hover {
+      background-color: red; }
+    .cart_card .card_content #status_denied_btn {
+      background-color: #6a6a6a;
+      font-weight: bold;
+      color: black; }
+    .cart_card .card_content #status_done_btn {
+      background-color: #08a500;
+      font-weight: bold;
+      color: black; }

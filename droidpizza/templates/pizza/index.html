@@ -1,0 +1,61 @@
+{% extends "pizza/layout.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Home
+{% endblock %}
+
+{% block main %}
+	<script src="{% static 'pizza/js/index.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'pizza/css/index.css' %}"/>
+
+	<!-- Custom Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
+
+	<ul>
+		<div class="card_item">
+			<span class="alert_message">{{messages}}</span>
+			{% for pizza in pizzas %}
+				<div class="card">
+					<div class="card-body">
+					
+						<img src="static/{{pizza.img}}" class="card-img float-left" alt="pizza_img">
+						<div class="float-left title_card">
+							<h5 class="card-title">{{pizza.name}}</h5>
+						</div>
+						<br>
+						<p></p>
+						<p class="card-text availability float-right"><small>Available: 
+							{% if pizza.available == "YES" %}
+								<span style="color: green;">{{pizza.available}}</span>
+							{% elif pizza.available == "NO" %}
+								<span style="color: red;">{{pizza.available}}</span>
+							{% endif %}
+						</small></p>
+						<p class="card-text ingredients">{{pizza.ingredients}}</p>
+						<div class="pizza_options">
+							<form action="/" onsubmit="return true;" method="POST">
+								{% csrf_token %}
+								<p class="total float-right">Total:<span class="shown_total" id="total_{{pizza.pk}}">{{pizza.price|add:"120"}}</span> MZN</p>
+								<p class="price float-right">Price:<span class="shown_price" id="price_{{pizza.pk}}">{{pizza.price}}</span> MZN|-|</p>
+								<input name="pizza_id" value="{{pizza.pk}}" class="hide_item"/>
+								<button type="submit" class="btn add_to_cart btn-success float-right" data-pizza="{{pizza.pk}}">Add to Cart</button>
+								<button class="btn build_pizza btn-primary float-right">Build Pizza</button>
+								<select name="pizza_size" id="pizza_size_{{pizza.pk}}" data-pizza="{{pizza.pk}}" class="form-control pizza_size float-right">
+									<option>S</option>
+									<option>M</option>
+									<option>L</option>
+								</select>
+								<input name="quantity" id="quantity_{{pizza.pk}}" data-pizza="{{pizza.pk}}" type="number" class="form-control quantity float-right" placeholder="Quantity" min="1" max="20" required/>
+							</form>
+						</div>
+					</div>
+				</div>
+			{% empty %}
+				<li>
+					No available Pizzas.
+				</li>
+			{% endfor %}
+		</div>
+	</ul>
+{% endblock %}

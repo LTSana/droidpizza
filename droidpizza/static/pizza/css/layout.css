@@ -1,0 +1,72 @@
+/* Styling for layout Page */
+.navbar-brand {
+  font-family: 'Kalam';
+  font-size: 120%;
+  font-weight: bold;
+  margin-top: 1%; }
+
+#signup_center .modal-content {
+  background-color: black; }
+  #signup_center .modal-content .modal-header .modal-title {
+    color: white; }
+  #signup_center .modal-content .modal-header .close {
+    color: white; }
+#signup_center .modal-body #username {
+  display: block;
+  width: 80%;
+  padding-top: 1%;
+  border: none;
+  border-bottom: solid 2px gray;
+  color: white;
+  background: black; }
+#signup_center .modal-body #username::placeholder {
+  color: rgba(0, 255, 255, 0.734); }
+#signup_center .modal-body .names_div #first_name {
+  width: 48.5%;
+  margin-left: 1%;
+  padding-top: 1%;
+  border: none;
+  background: black;
+  color: white;
+  border-bottom: solid 2px gray; }
+#signup_center .modal-body .names_div #last_name {
+  width: 48.5%;
+  margin-left: 1%;
+  border: none;
+  background: black;
+  color: white;
+  border-bottom: solid 2px gray; }
+#signup_center .modal-body .names_div #first_name::placeholder {
+  color: rgba(0, 255, 255, 0.734); }
+#signup_center .modal-body .names_div #last_name::placeholder {
+  color: rgba(0, 255, 255, 0.734); }
+#signup_center .modal-body .email_div #e_mail {
+  border: none;
+  background: black;
+  color: white;
+  border-bottom: solid 2px gray; }
+#signup_center .modal-body .email_div #e_mail::placeholder {
+  color: rgba(0, 255, 255, 0.734); }
+#signup_center .modal-body .password_div #password {
+  border: none;
+  background: black;
+  color: white;
+  border-bottom: solid 2px gray; }
+#signup_center .modal-body .password_div #password::placeholder {
+  color: rgba(0, 255, 255, 0.734); }
+#signup_center .modal-body .password_div #passwordconfirm {
+  border: none;
+  background: black;
+  color: white;
+  border-bottom: solid 2px gray; }
+#signup_center .modal-body .password_div #passwordconfirm::placeholder {
+  color: rgba(0, 255, 255, 0.734); }
+#signup_center .modal-footer {
+  padding-bottom: 0%;
+  padding-top: 0%; }
+  #signup_center .modal-footer p {
+    color: white;
+    margin-top: 2.5%; }
+  #signup_center .modal-footer button {
+    padding-top: -20%;
+    padding-bottom: -20%; }

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'pizza/css/layout.css' %}">
+	<script src="{% static 'pizza/js/layout.js' %}"></script>
+
+	<!-- Tiny logo icon in tab -->
+	<link href="{% static 'pizza/icon/pizza_icon.png' %}" rel="shortcut icon">
+
+	<!-- Custom fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Nova Flat' rel='stylesheet'>
+
+	<title>
+		{% block title %}{% endblock %}
+	</title>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<!-- Navbar content -->
+		<a class="navbar-brand" href="/">Droid Pizza</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav mr-auto mt-2">
+				<li class="nav-item">
+					<a class="nav-link" href="/">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/build_pizza">Build a Pizza</a>
+				</li>
+
+				{% if request.user.is_staff %}
+					<li class="nav-item">
+						<a class="nav-link" href="/add_topping">Add Topping</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/pizza_checkout_staff">Pizza Orders</a>
+					</li>
+				{% endif %}
+				
+			</ul>
+			<ul class="navbar-nav ml-auto mt-2">
+				<li class="nav-item">
+					<a class="nav-link" href="/cart_page">Cart<span class="badge badge-light">{{cart_items}}</span></a>
+				</li>
+				{% if not user.is_authenticated %}
+					<li class="nav-item">
+						<a class="nav-link" id="navbar_login" href="/login">Login</a>
+					</li>
+					<li class="nav-item">
+						<!-- Button trigger modal -->
+						<a data-toggle="modal" data-target="#signup_center" href="#" class="nav-link">
+							Sign Up
+						</a>
+					</li>
+				{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="/account">Account</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="navbar_login" href="/logout">Logout</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+	</nav>
+	{% if not user.is_authenticated %}
+		<!-- Modal -->
+		<div class="modal fade" id="signup_center" tabindex="-1" role="dialog" aria-labelledby="signup_center_title" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="signup_center_title">Sign Up</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form action="register" method="POST">
+							{% csrf_token %}
+							<div class="username_div form-group">
+								<input type="text" name="username" autofocus="off" onkeyup="check_login_username()" id="username" placeholder="username" maxlength="64" class="form-control" required/>
+							</div>
+							<div class="names_div form-group form-row">
+								<input type="text" name="first_name" id="first_name" onkeyup="check_login_first_name()" placeholder="First Name" maxlength="64" class="form-control" required/>
+								<input type="text" name="last_name" id="last_name" onkeyup="check_login_last_name()" placeholder="Last Name" maxlength="64" class="form-control" required/>
+							</div>
+							<div class="email_div form-group">
+								<input type="text" name="e_mail" id="e_mail" onkeyup="check_login_email()" placeholder="E-mail" maxlength="64" class="form-control" required/>
+							</div>
+							<div class="password_div form-group">
+								<input type="password" name="password" id="password" onkeyup="check_login_password()" placeholder="Password (8-64 characters)" minlength="8" maxlength="64" class="form-control" required/>
+							</div>
+							<div class="password_div form-group">
+								<input type="password" name="passwordconfirm" id="passwordconfirm" onkeyup="check_login_passwordconfirm()" placeholder="Confirm Password" minlength="8" maxlength="64" class="form-control" required/>
+							</div>
+							<span class="signup_btn"><button class="btn btn-dark" disabled>Sign Up</button></span>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<p>Already have an account? <a href="/login">Login</a></p>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+	<main>
+		{% block main %}{% endblock %}
+	</main>
+</body>

@@ -1,0 +1,113 @@
+{% extends "pizza/layout.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Pizza Orders
+{% endblock %}
+
+{% block main %}
+	<script src="{% static 'pizza/js/pizza_checkout.js' %}"></script>
+	<link href="{% static 'pizza/css/pizza_checkout.css' %}" rel="stylesheet"/>
+	<div class="contain_cards">
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" id="wait-tab" data-toggle="tab" href="#wait" role="tab" aria-controls="wait" aria-selected="true">Waiting Order</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="done-tab" data-toggle="tab" href="#done" role="tab" aria-controls="done" aria-selected="false">Done Orders</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="denied-tab" data-toggle="tab" href="#denied" role="tab" aria-controls="denied" aria-selected="false">Denied Orders</a>
+			</li>
+		</ul>
+	</div>
+	<div class="tab-content" id="myTabContent">
+		<div class="tab-pane fade show active" id="wait" role="tabpanel" aria-labelledby="wait-tab">
+			<div class="contain_cards">
+				{% csrf_token %}
+				{% for orders in order %}
+					{% if orders.status == "waiting" %}
+						<div class="order_card">
+							<div class="card_content">
+								<h3>Order ID: {{orders.pk}}</h3>
+								<p class="splitline"></p>
+								<p>Address: {{orders.address}}</p>
+								<p>Cart ID: {{orders.cart_id}}</p>
+								<p>Status: {{orders.status}}</p>
+			
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-primary" id="viewbtn" data-order="{{orders.pk}}" data-toggle="modal" data-target="#orderdetails">View Order</button>
+								<button type="button" class="btn btn-danger" id="deniebtn" data-order="{{orders.pk}}">Denie Order</button>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+		<div class="tab-pane fade" id="done" role="tabpanel" aria-labelledby="done-tab">
+			<div class="contain_cards">
+				{% csrf_token %}
+				{% for orders in order %}
+					{% if orders.status == "done" %}
+						<div class="order_card">
+							<div class="card_content">
+								<h3>Order ID: {{orders.pk}}</h3>
+								<p class="splitline"></p>
+								<p>Address: {{orders.address}}</p>
+								<p>Cart ID: {{orders.cart_id}}</p>
+								<p>Status: {{orders.status}}</p>
+			
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-primary" id="viewbtn" data-order="{{orders.pk}}" data-toggle="modal" data-target="#orderdetails">View Order</button>
+								
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+		<div class="tab-pane fade" id="denied" role="tabpanel" aria-labelledby="denied-tab">
+			<div class="contain_cards">
+				{% csrf_token %}
+				{% for orders in order %}
+					{% if orders.status == "denied" %}
+						<div class="order_card">
+							<div class="card_content">
+								<h3>Order ID: {{orders.pk}}</h3>
+								<p class="splitline"></p>
+								<p>Address: {{orders.address}}</p>
+								<p>Cart ID: {{orders.cart_id}}</p>
+								<p>Status: {{orders.status}}</p>
+			
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-primary" id="viewbtn" data-order="{{orders.pk}}" data-toggle="modal" data-target="#orderdetails">View Order</button>
+								
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="orderdetails" tabindex="-1" role="dialog" aria-labelledby="orderdetailsTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="orderdetailsTitle">Order Details</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<span id="orderdescription"></span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<span id="orderdone"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,110 @@
+/* Styling for the Adding Topping page */
+body {
+	background-color: rgba(189, 167, 95, 0.898);
+}
+.container {
+	margin-top: 1%;
+
+	#add_topping {
+		margin-bottom: 1%;
+	}
+
+	.image_guide {
+		margin-bottom: 0%;
+		font-weight: bold;
+	}
+
+	.fileuploader {
+		margin-bottom: 1%;
+	}
+
+	.price {
+		margin-bottom: 1%;
+	}
+}
+
+.div_toppings_type {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	
+	margin-top: 2%;
+	margin-bottom: 2%;
+	margin-left: 5%;
+	padding-bottom: 135px;
+
+	#selected_toppings {
+		font-family: 'Arvo', serif;
+	}
+
+	.topping_box {
+		width: 60px;
+		padding-left: 1%;
+		padding-bottom: 1%;
+		margin-right: 8%;
+
+		.topping_content {
+
+			#pizza_build_selection_form {
+				width: 340%;
+			}
+
+			.switch_toggle_topping {
+				width: 160px;
+				margin-left: -2px;
+				margin-top: 5px;
+				color: black;
+				background-color: rgba(25, 172, 133, 0.68);
+				font-weight: bold;
+			}
+			.switch_toggle_topping:hover {
+				background-color: rgb(25, 172, 133);
+			}
+			.switch_on {
+				color: rgb(251, 255, 0);
+			}
+			.switch_off {
+				color: red;
+			}
+
+			.print_btn {
+				width: 160px;
+				margin-left: -2px;
+				margin-top: 5px;
+				color: black;
+				background-color: rgba(25, 157, 172, 0.68);
+				font-weight: bold;
+				font-size: 80%;
+			}
+			.print_btn:hover {
+				background-color: rgb(25, 157, 172);
+			}
+			
+			.remove_topping {
+				width: 160px;
+				margin-left: -2px;
+				margin-top: 5px;
+				color: black;
+				background-color: rgb(255, 145, 0);
+				font-weight: bold;
+			}
+			.remove_topping:hover {
+				background-color: rgb(255, 17, 17);
+			}
+		
+			img {
+				width: 25%;
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+				background-color: gray;
+				border-radius: 5%;
+				border-color: black;
+				margin-right: 1%;
+				margin-top: 1%;
+			}
+		}
+	}
+}
+
+#topping_price_change {
+	display: none;
+}

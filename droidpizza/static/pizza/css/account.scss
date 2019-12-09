@@ -1,0 +1,59 @@
+/* Styling for account page */
+body {
+	background-color: rgba(189, 167, 95, 0.898);
+}
+.account_container {
+	display: block;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 1%;
+	background-color: rgba(128, 128, 128, 0.558);
+	top: 10%;
+	bottom: 5%;
+	width: 90%;
+	position: absolute;
+
+	.account_content {
+		margin-left: 1%;
+		margin-top: 1%;
+		font-family: 'Quantico', sans-serif;
+
+		.focus_content {
+			font-weight: bold;
+		}
+
+		input {
+			margin-bottom: 1%;
+		}
+	}
+
+	.messages0 {
+		display: block;
+		background-color: rgba(255, 0, 0, 0.632);
+		font-weight: bold;
+
+		span {
+			margin-left: 30%;
+		}
+	}
+
+	.messages1, .messages2, .messages3 {
+		display: block;
+		background-color: rgba(255, 145, 0, 0.632);
+		font-weight: bold;
+
+		span {
+			margin-left: 30%;
+		}
+	}
+
+	.messages4 {
+		display: block;
+		background-color: rgba(21, 255, 0, 0.632);
+		font-weight: bold;
+
+		span {
+			margin-left: 30%;
+		}
+	}
+}

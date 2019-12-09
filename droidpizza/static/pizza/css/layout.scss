@@ -1,0 +1,108 @@
+/* Styling for layout Page */
+
+.navbar-brand {
+	font-family: 'Kalam';
+	font-size: 120%;
+	font-weight: bold;
+	margin-top: 1%;
+}
+
+#signup_center {
+	$background_color: black;
+	$form_font_color: white;
+	$placeholder_font_color: rgba(0, 255, 255, 0.734);
+
+	.modal-content {
+		background-color: $background_color;
+		.modal-header {
+			.modal-title {
+				color: $form_font_color;
+			}
+			.close {
+				color: $form_font_color;
+			}
+		}
+	}
+	.modal-body {
+		#username {
+			display: block;
+			width: 80%;
+			padding-top: 1%;
+			border: none;
+			border-bottom: solid 2px gray;
+			color: $form_font_color;
+			background: $background_color;
+		}
+		#username::placeholder {
+			color: $placeholder_font_color;
+		}
+		.names_div {
+			#first_name {
+				width: 48.5%;
+				margin-left: 1%;
+				padding-top: 1%;
+				border: none;
+				background: $background_color;
+				color: $form_font_color;
+				border-bottom: solid 2px gray;
+			}
+			#last_name {
+				width: 48.5%;
+				margin-left: 1%;
+				border: none;
+				background: $background_color;
+				color: $form_font_color;
+				border-bottom: solid 2px gray;
+			}
+			#first_name::placeholder {
+				color: $placeholder_font_color;
+			}
+			#last_name::placeholder {
+				color: $placeholder_font_color;
+			}
+		}
+		.email_div {
+			#e_mail {
+				border: none;
+				background: $background_color;
+				color: $form_font_color;
+				border-bottom: solid 2px gray;
+			}
+			#e_mail::placeholder {
+				color: $placeholder_font_color;
+			}
+		}
+		.password_div {
+			#password {
+				border: none;
+				background: $background_color;
+				color: $form_font_color;
+				border-bottom: solid 2px gray;
+			}
+			#password::placeholder {
+				color: $placeholder_font_color;
+			}
+			#passwordconfirm {
+				border: none;
+				background: $background_color;
+				color: $form_font_color;
+				border-bottom: solid 2px gray;
+			}
+			#passwordconfirm::placeholder {
+				color: $placeholder_font_color;
+			}
+		}
+	}
+	.modal-footer {
+		p {
+			color: $form_font_color;
+			margin-top: 2.5%;
+		}
+		button {
+			padding-top: -20%;
+			padding-bottom: -20%;
+		}
+		padding-bottom: 0%;
+		padding-top: 0%;
+	}
+}

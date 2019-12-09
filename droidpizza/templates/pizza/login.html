@@ -1,0 +1,35 @@
+{% extends "pizza/layout.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	login
+{% endblock %}
+
+{% block main %}
+	<!-- Custom fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Nova Flat' rel='stylesheet'>
+
+	<link rel="stylesheet" href="{% static 'pizza/css/login.css' %}">
+
+	<body background="{% static 'pizza/wallpapers/login_pizza.jpg' %}">
+		<h3 class="title">Droid Pizza</h3>
+		<p class="desc">Feeling hungry? Need That tasty cheese? Want it hot and crunshy?</p>
+		<p class="desc">Order with us now!</p>
+		<div class="login_box">
+			<h3>Login</h3>
+			<p class="alert_msg">{{message}}</p>
+			<form action="/login" method="POST">
+				{% csrf_token %}
+				<div>
+					<input type="text" autofocus class="form-control" name="usernamelogin" id="username_login" placeholder="username or email" maxlength="64" required>
+				</div>
+				<div>
+					<input type="password" class="form-control" name="passwordlogin" id="password_login" placeholder="password" required>
+				</div>
+				<button type="submit" class="btn btn-primary login_btn">Log in</button>
+			</form>
+			<p class="footer">Don't have an account? <a data-toggle="modal" data-target="#signup_center" href="#">Sign Up Here</a></p>
+		</div>
+	</body>
+{% endblock %}

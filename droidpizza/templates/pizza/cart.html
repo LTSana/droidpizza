@@ -1,0 +1,162 @@
+{% extends "pizza/layout.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Cart
+{% endblock %}
+
+{% block main %}
+	<script src="{% static 'pizza/js/cart.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'pizza/css/cart.css' %}"/>
+	{% csrf_token %}
+
+	<!-- Custom fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
+	
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">Waiting</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="progress-tab" data-toggle="tab" href="#progress" role="tab" aria-controls="progress" aria-selected="false">In process</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="done-tab" data-toggle="tab" href="#done" role="tab" aria-controls="done" aria-selected="false">Done</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="denied-tab" data-toggle="tab" href="#denied" role="tab" aria-controls="denied" aria-selected="false">Denied</a>
+		</li>
+	</ul>
+	<div class="tab-content" id="myTabContent">
+		<div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+			{% for carts in cart %}
+				{% if carts.status == "waiting" %}
+					<div class="cart_card">
+						<div class="card_content">
+							<p class="cart_id">Cart ID: {{carts.pk}}</p>
+							<p class="splitter_top"></p>
+							<p class="pizza_build"><span class="item_detail">Size</span>: {{carts.size}}</p>
+							<p class="pizza_build"><span class="item_detail">Crust</span>: {{carts.crust}}</p>
+							<p class="pizza_build"><span class="item_detail">Toppings</span>: {{carts.toppings}}</p>
+							<p class="pizza_build"><span class="item_detail">Selected Toppings</span>: {{carts.selected_toppings}}</p>
+							<p class="pizza_build"><span class="item_detail">Quantity</span>: {{carts.quantity}}</p>
+							<p class="splitter_bottom"></p>
+							<p class="total_value"><span class="item_detail">Value</span>: ${{carts.total_value}}</p>
+							<p class="total_value_Q"><span class="item_detail">Total Price</span>: ${{carts.total_value_Q}}</p>
+			
+							{% if carts.status == "processing" %}
+								<button class="btn" id="status_btn" disabled>processing order...</button>
+							{% elif carts.status == "denied" %}
+								<button class="btn" id="status_denied_btn" disabled>Order Denied</button>
+							{% else %}
+								<button class="btn btn-primary" id="checkout_button" data-cart="{{carts.pk}}">Checkout</button>
+								<button class="btn btn-danger" id="remove_button" data-cart="{{carts.pk}}">Remove</button>
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+			{% if not cart %}
+				<span class="badge badge_cart badge-secondary">You Have No items in your waiting Cart.</span>
+			{% endif %}
+		</div>
+		<div class="tab-pane fade" id="progress" role="tabpanel" aria-labelledby="progress-tab">
+			{% for carts in cart %}
+				{% if carts.status == "processing" %}
+					<div class="cart_card">
+						<div class="card_content">
+							<p class="cart_id">Cart ID: {{carts.pk}}</p>
+							<p class="splitter_top"></p>
+							<p class="pizza_build"><span class="item_detail">Size</span>: {{carts.size}}</p>
+							<p class="pizza_build"><span class="item_detail">Crust</span>: {{carts.crust}}</p>
+							<p class="pizza_build"><span class="item_detail">Toppings</span>: {{carts.toppings}}</p>
+							<p class="pizza_build"><span class="item_detail">Selected Toppings</span>: {{carts.selected_toppings}}</p>
+							<p class="pizza_build"><span class="item_detail">Quantity</span>: {{carts.quantity}}</p>
+							<p class="splitter_bottom"></p>
+							<p class="total_value"><span class="item_detail">Value</span>: ${{carts.total_value}}</p>
+							<p class="total_value_Q"><span class="item_detail">Total Price</span>: ${{carts.total_value_Q}}</p>
+			
+							{% if carts.status == "processing" %}
+								<button class="btn" id="status_btn" disabled>processing order...</button>
+							{% elif carts.status == "denied" %}
+								<button class="btn" id="status_denied_btn" disabled>Order Denied</button>
+							{% else %}
+								<button class="btn btn-primary" id="checkout_button" data-cart="{{carts.pk}}">Checkout</button>
+								<button class="btn btn-danger" id="remove_button" data-cart="{{carts.pk}}">Remove</button>
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+			{% if not cart %}
+				<span class="badge badge_cart badge-secondary">You Have No items in your processing Cart.</span>
+			{% endif %}
+		</div>
+		<div class="tab-pane fade" id="done" role="tabpanel" aria-labelledby="done-tab">
+			{% for carts in cart %}
+				{% if carts.status == "done" %}
+					<div class="cart_card">
+						<div class="card_content">
+							<p class="cart_id">Cart ID: {{carts.pk}}</p>
+							<p class="splitter_top"></p>
+							<p class="pizza_build"><span class="item_detail">Size</span>: {{carts.size}}</p>
+							<p class="pizza_build"><span class="item_detail">Crust</span>: {{carts.crust}}</p>
+							<p class="pizza_build"><span class="item_detail">Toppings</span>: {{carts.toppings}}</p>
+							<p class="pizza_build"><span class="item_detail">Selected Toppings</span>: {{carts.selected_toppings}}</p>
+							<p class="pizza_build"><span class="item_detail">Quantity</span>: {{carts.quantity}}</p>
+							<p class="splitter_bottom"></p>
+							<p class="total_value"><span class="item_detail">Value</span>: ${{carts.total_value}}</p>
+							<p class="total_value_Q"><span class="item_detail">Total Price</span>: ${{carts.total_value_Q}}</p>
+			
+							{% if carts.status == "processing" %}
+								<button class="btn" id="status_btn" disabled>processing order...</button>
+							{% elif carts.status == "denied" %}
+								<button class="btn" id="status_denied_btn" disabled>Order Denied</button>
+							{% elif carts.status == "done" %}
+								<button class="btn" id="status_done_btn" disabled>Done</button>
+							{% else %}
+								<button class="btn btn-primary" id="checkout_button" data-cart="{{carts.pk}}">Checkout</button>
+								<button class="btn btn-danger" id="remove_button" data-cart="{{carts.pk}}">Remove</button>
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+			{% if not cart %}
+				<span class="badge badge_cart badge-secondary">You Have No items in your done Cart.</span>
+			{% endif %}
+		</div>
+		<div class="tab-pane fade" id="denied" role="tabpanel" aria-labelledby="denied-tab">
+			{% for carts in cart %}
+				{% if carts.status == "denied" %}
+					<div class="cart_card">
+						<div class="card_content">
+							<p class="cart_id">Cart ID: {{carts.pk}}</p>
+							<p class="splitter_top"></p>
+							<p class="pizza_build"><span class="item_detail">Size</span>: {{carts.size}}</p>
+							<p class="pizza_build"><span class="item_detail">Crust</span>: {{carts.crust}}</p>
+							<p class="pizza_build"><span class="item_detail">Toppings</span>: {{carts.toppings}}</p>
+							<p class="pizza_build"><span class="item_detail">Selected Toppings</span>: {{carts.selected_toppings}}</p>
+							<p class="pizza_build"><span class="item_detail">Quantity</span>: {{carts.quantity}}</p>
+							<p class="splitter_bottom"></p>
+							<p class="total_value"><span class="item_detail">Value</span>: ${{carts.total_value}}</p>
+							<p class="total_value_Q"><span class="item_detail">Total Price</span>: ${{carts.total_value_Q}}</p>
+			
+							{% if carts.status == "processing" %}
+								<button class="btn" id="status_btn" disabled>processing order...</button>
+							{% elif carts.status == "denied" %}
+								<button class="btn" id="status_denied_btn" disabled>Order Denied</button>
+							{% else %}
+								<button class="btn btn-primary" id="checkout_button" data-cart="{{carts.pk}}">Checkout</button>
+								<button class="btn btn-danger" id="remove_button" data-cart="{{carts.pk}}">Remove</button>
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+			{% if not cart %}
+				<span class="badge badge_cart badge-secondary">You Have No items in your denied Cart.</span>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

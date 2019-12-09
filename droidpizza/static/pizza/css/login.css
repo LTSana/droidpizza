@@ -1,0 +1,77 @@
+/* Styling for login page */
+body {
+  background-color: rgba(189, 167, 95, 0.898); }
+
+body {
+  background-position: top;
+  background-repeat: repeat;
+  -webkit-background-size: auto;
+  -moz-background-size: auto;
+  -o-background-size: auto;
+  background-size: cover;
+  font-family: sans-serif;
+  background-attachment: fixed; }
+
+.title {
+  color: white;
+  margin-top: 5%;
+  margin-left: 20%;
+  font-family: 'Kalam';
+  font-size: 350%;
+  text-shadow: 2px 2px black; }
+
+.desc {
+  color: white;
+  margin-top: 0%;
+  margin-left: 10%;
+  font-family: 'Kalam';
+  font-size: 150%;
+  text-shadow: 2px 2px black; }
+
+.login_box {
+  padding-top: 6%;
+  padding-bottom: 2%;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin-top: -3%;
+  margin-right: 40%;
+  margin-left: 35%;
+  background-color: rgba(0, 0, 0, 0.712); }
+  .login_box h3 {
+    margin-top: -20%;
+    margin-left: 35%;
+    color: white;
+    font-family: 'Nova Flat'; }
+  .login_box #username_login {
+    background-color: rgba(0, 0, 0, 0.712);
+    margin-bottom: 2%;
+    border: none;
+    color: white;
+    border-bottom: solid 5px gray; }
+  .login_box #username_login::placeholder {
+    color: rgba(255, 166, 0, 0.7); }
+  .login_box #password_login {
+    background-color: rgba(0, 0, 0, 0.712);
+    margin-bottom: 2%;
+    border: none;
+    color: white;
+    border-bottom: solid 5px gray; }
+  .login_box #password_login::placeholder {
+    color: rgba(255, 166, 0, 0.7); }
+  .login_box .login_btn {
+    background-color: orange;
+    color: black;
+    margin-left: 35%; }
+  .login_box .login_btn:hover {
+    background-color: greenyellow;
+    color: black; }
+  .login_box .footer {
+    color: white; }
+    .login_box .footer a {
+      color: aqua; }
+  .login_box .alert_msg {
+    color: red;
+    background-color: black;
+    margin-right: 10%;
+    margin-left: 10%;
+    padding-left: 10%; }

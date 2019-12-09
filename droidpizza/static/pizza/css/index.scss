@@ -1,0 +1,88 @@
+/* Styling for the index page */
+body {
+	background-color: rgba(189, 167, 95, 0.898);
+}
+
+@keyframes hide_msg {
+	0% {
+		background-color: rgba(172, 255, 47, 0.564);	
+	}
+	50% {
+		background-color: rgba(172, 255, 47, 0.401);
+	}
+	100% {
+		background-color: rgba(172, 255, 47, 0);
+		opacity: 0;
+	}
+}
+.alert_message {
+	display: block;
+	background-color: rgba(172, 255, 47, 0.564);
+	padding-left: 5%;
+	margin-right: 1%;
+	font-family: 'Orbitron', sans-serif;
+
+	animation-name: hide_msg;
+	animation-duration: 10s;
+	animation-fill-mode: forwards;
+}
+
+.card_item {
+	.card {
+		margin-left: 5%;
+		margin-right: 5%;
+		margin-top: 1%;
+		margin-bottom: 1%;
+		padding-left: 0%;
+		padding-right: 0%;
+		padding-top: 0%;
+		padding-bottom: 0%;
+		.card-img {
+			width: 15%;
+		}
+		.title_card {
+			padding-right: 1%;
+			padding-left: 1%;
+			padding-bottom: 0%;
+			margin-bottom: -2%;
+		}
+		.ingredients {
+			margin-left: 16%;
+			padding-left: -50%;
+			padding-right: 40%;
+		}
+		.pizza_options {
+			margin-top: -10%;
+			.price {
+				margin-top: 5%;
+				.shown_price {
+					font-weight: bold;
+				}
+			}
+			.total {
+				margin-top: 5%;
+				.shown_total {
+					font-weight: bold;
+				}
+			}
+			.pizza_size {
+				width: 5%;
+				margin-right: 1%;
+			}
+			.build_pizza {
+				margin-right: 1%;
+			}
+			.quantity {
+				width: 8%;
+				margin-right: 1%;
+			}
+			.hide_item {
+				display: none;
+			}
+		}
+		.availability {
+			position: absolute;
+			margin-left: 70%;
+		}
+	}
+}

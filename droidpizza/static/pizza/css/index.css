@@ -1,0 +1,65 @@
+/* Styling for the index page */
+body {
+  background-color: rgba(189, 167, 95, 0.898); }
+
+@keyframes hide_msg {
+  0% {
+    background-color: rgba(172, 255, 47, 0.564); }
+  50% {
+    background-color: rgba(172, 255, 47, 0.401); }
+  100% {
+    background-color: rgba(172, 255, 47, 0);
+    opacity: 0; } }
+.alert_message {
+  display: block;
+  background-color: rgba(172, 255, 47, 0.564);
+  padding-left: 5%;
+  margin-right: 1%;
+  font-family: 'Orbitron', sans-serif;
+  animation-name: hide_msg;
+  animation-duration: 10s;
+  animation-fill-mode: forwards; }
+
+.card_item .card {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding-left: 0%;
+  padding-right: 0%;
+  padding-top: 0%;
+  padding-bottom: 0%; }
+  .card_item .card .card-img {
+    width: 15%; }
+  .card_item .card .title_card {
+    padding-right: 1%;
+    padding-left: 1%;
+    padding-bottom: 0%;
+    margin-bottom: -2%; }
+  .card_item .card .ingredients {
+    margin-left: 16%;
+    padding-left: -50%;
+    padding-right: 40%; }
+  .card_item .card .pizza_options {
+    margin-top: -10%; }
+    .card_item .card .pizza_options .price {
+      margin-top: 5%; }
+      .card_item .card .pizza_options .price .shown_price {
+        font-weight: bold; }
+    .card_item .card .pizza_options .total {
+      margin-top: 5%; }
+      .card_item .card .pizza_options .total .shown_total {
+        font-weight: bold; }
+    .card_item .card .pizza_options .pizza_size {
+      width: 5%;
+      margin-right: 1%; }
+    .card_item .card .pizza_options .build_pizza {
+      margin-right: 1%; }
+    .card_item .card .pizza_options .quantity {
+      width: 8%;
+      margin-right: 1%; }
+    .card_item .card .pizza_options .hide_item {
+      display: none; }
+  .card_item .card .availability {
+    position: absolute;
+    margin-left: 70%; }

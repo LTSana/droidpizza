@@ -1,0 +1,53 @@
+{% extends "pizza/layout.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Build A Pizza
+{% endblock %}
+
+{% block main %}
+	<script src="{% static 'pizza/js/build_pizza.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'pizza/css/build_pizza.css' %}"/>
+
+	<!-- Custom Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Fascinate+Inline&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+	
+	<body>
+		<div class="div_pizza_size">
+			<p><label for="pizzasize">Pizza Size: <span id="selected_pizza_size"></span></label></p>
+			<button id="pizza_build_selection_form" data-element="small_pizza_size" class="btn btn-warning">small</button>
+			<button id="pizza_build_selection_form" data-element="medium_pizza_size" class="btn btn-primary">Medium</button>
+			<button id="pizza_build_selection_form" data-element="large_pizza_size" class="btn btn-danger">LARGE</button>
+		</div>
+		<div class="div_crost">
+			<p><label for="crost">Crust Size: <span id="selected_pizza_crust"></span></label></p>
+			<div>
+				<img id="pizza_build_selection_form" data-element="small_pizza_crust" class="crost_img_small" id="smallcrost" src="{% static 'pizza/img/crost_size_small_1.png' %}"/>
+				<img id="pizza_build_selection_form" data-element="medium_pizza_crust" class="crost_img_medium" id="mediumcrost" src="{% static 'pizza/img/crost_size_medium_1.png' %}"/>
+				<img id="pizza_build_selection_form" data-element="large_pizza_crust" class="crost_img_large" id="largecrost" src="{% static 'pizza/img/crost_size_large_1.png' %}"/>
+			</div>
+		</div>
+		<div class="div_toppings_selection">
+			<p><label for="topping1">Toppings: <span id="number_available_toppings">0</span></label></p>
+			<img id="pizza_build_selection_form" data-element="1_topping" class="topping_1" id="topping1" src="{% static 'pizza/img/topping_1.png' %}"/>
+			<img id="pizza_build_selection_form" data-element="2_topping" class="topping_2" id="topping2" src="{% static 'pizza/img/topping_2.png' %}"/>
+			<img id="pizza_build_selection_form" data-element="3_topping" class="topping_3" id="topping3" src="{% static 'pizza/img/topping_3.png' %}"/>
+		</div>
+		<div class="div_toppings_type">
+			<p><label for="topping1">Topping Types (<span id="number_toppings_used">0</span>/<span id="number_available_toppings_selected">0</span>): <span id="selected_toppings"></span></label></p>
+			<p><button class="btn btn-primary reset_btn">Reset</button></p>
+			{% for toppings in topping %}
+				{% if toppings.available == "ON" %}
+					<img id="pizza_build_selection_form" class="topping_img" id="topping_img" data-topping="{{toppings.pk}}" src="/static/pizza/img/topping_img/{{toppings.image}}"/>
+				{% endif %}
+			{% endfor %}
+		</div>
+		<div class="div_payment_information">
+			<p class="information">Payment Details.</p>
+			<input type="number" id="pizza_quantity" class="form-control" placeholder="Quantity" max="20" min="1" required>
+			{% csrf_token %}
+			<p class="payment_items"><span class="back_color_box">TOTAL PRICE: <span id="total_value">0</span> MZN <button class="btn btn-primary add_to_cart">Add To Cart</button></span></p>
+		</div>
+	</body>
+{% endblock %}

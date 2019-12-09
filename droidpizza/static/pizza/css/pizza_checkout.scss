@@ -1,0 +1,36 @@
+/* Styling for the Pizza Order page (pizza_checkout) */
+body {
+	background-color: rgba(189, 167, 95, 0.898);
+}
+.contain_cards {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	margin-top: 2%;
+	margin-left: 45px;
+}
+
+.order_card {
+	background-color: black;
+	width: 20%;
+	color: white;
+	margin-left: 5px;
+
+	.card_content {
+		margin-left: 1%;
+		margin-bottom: 1.5%;
+
+		.splitline {
+			display: box;
+			padding-bottom: 1%;
+			margin-right: 0%;
+			margin-left: -2px;
+			margin-top: -2%;
+			background-color: rgb(255, 0, 0);
+		}
+	}
+}
+
+#order_id {
+	display: none;
+}

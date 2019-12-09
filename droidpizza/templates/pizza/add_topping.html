@@ -1,0 +1,64 @@
+{% extends "pizza/layout.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Add Toppings
+{% endblock %}
+
+{% block main %}
+	<script src="{% static 'pizza/js/topping.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'pizza/css/topping.css' %}"/>
+	<div class="container">
+		<form action="/add_topping" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			<input type="text" name="add_topping" id="add_topping" placeholder="Add Topping" style="width: 50%;" class="form-control"/>
+			<p class="image_guide">Image must be 600x600 and less then 1Mb.</p>
+			<input type="file" name="topping_image" id="topping_image" class="fileuploader" placeholder="Add Topping Image"/>
+			<input type=number min="0" name="price" id="price" placeholder="Topping Price" style="width: 50%;" class="price form-control"/>
+			<button type="submit" id="add_topping_btn" class="btn btn-dark">Add Topping</button>
+		</form>
+	</div>
+	<div class="div_toppings_type">
+		{% for toppings in topping %}
+		<div class="topping_box">
+			<div class="topping_content">
+				<img id="pizza_build_selection_form" class="topping_img" id="topping_img" src="/static/pizza/img/topping_img/{{toppings.image}}"/>
+				<br>
+				{% if toppings.available == "ON" %}
+					<button class="btn switch_toggle_topping" id="switch_toggle_btn" data-topping_id="{{toppings.pk}}">Turn <span class="switch_off" id="btn_status">OFF</span></button>
+				{% elif toppings.available == "OFF" %}
+					<button class="btn switch_toggle_topping" id="switch_toggle_btn" data-topping_id="{{toppings.pk}}">Turn <span class="switch_on" id="btn_status">ON</span></button>
+				{% endif %}
+				<br>
+				<button data-toggle="modal" data-target="#pricechaningmodal" class="btn print_btn" id="print_btn" data-topping_id="{{toppings.pk}}">Change Price: {{toppings.price}}</button>
+				<br>
+				<button class="btn remove_topping" id="remove_btn" data-topping_id="{{toppings.pk}}">REMOVE</button>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="pricechaningmodal" tabindex="-1" role="dialog" aria-labelledby="pricechaningmodalTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="pricechaningmodalTitle">Change Price</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Please place new Price.
+					{% csrf_token %}
+					<input type="number" min="0" class="form-control" placeholder="Price" id="new_price"/>
+					<span id="topping_price_change"></span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" id="save_changes">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
