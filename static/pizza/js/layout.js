@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Validate the username and check if it can be used
 	check_login_username = () => {
 		document.querySelector("#username").style.borderColor = "gray";
-		document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark' disabled>Sign Up</button>"
+		document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark' disabled><i class='fas fa-user-plus'></i> Sign Up</button>"
 		clearInterval(username_check_timeout);
 		if (document.querySelector("#username").value.length > 0 && document.querySelector("#username").value.length < 65) {
 			username_check_timeout = setTimeout(check_username, 2000);
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 	// Validate the First name
 	check_login_first_name = () => {
-		document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark' disabled>Sign Up</button>"
+		document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark' disabled><i class='fas fa-user-plus'></i> Sign Up</button>"
 		if (document.querySelector("#first_name").value.length > 0 && document.querySelector("#first_name").value.length < 65) {
 			document.querySelector("#first_name").style.borderColor = "green";
 			first_name = true;
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 	// Validate the Last name
 	check_login_last_name = () => {
-		document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark' disabled>Sign Up</button>"
+		document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark' disabled><i class='fas fa-user-plus'></i> Sign Up</button>"
 		if (document.querySelector("#last_name").value.length > 0 && document.querySelector("#last_name").value.length < 65) {
 			document.querySelector("#last_name").style.borderColor = "green";
 			last_name = true;
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 	// Validate the email and check if it can be used
 	check_login_email = () => {
-		document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark' disabled>Sign Up</button>"
+		document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark' disabled><i class='fas fa-user-plus'></i> Sign Up</button>"
 		document.querySelector("#e_mail").style.borderColor = "gray";
 		clearInterval(email_check_timeout)
 		if (document.querySelector("#e_mail").value.length > 0 && document.querySelector("#e_mail").value.length < 65) {
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 	// Validate password
 	check_login_password = () => {
-		document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark' disabled>Sign Up</button>"
+		document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark' disabled><i class='fas fa-user-plus'></i> Sign Up</button>"
 		if (document.querySelector("#password").value.length >= 8 && document.querySelector("#password").value.length < 65) {
 			document.querySelector("#password").style.borderColor = "green";
 			password = true;
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 	// Confirm that password and confirm password match
 	check_login_passwordconfirm = () => {
-		document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark' disabled>Sign Up</button>"
+		document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark' disabled><i class='fas fa-user-plus'></i> Sign Up</button>"
 		if (document.querySelector("#passwordconfirm").value.length >= 8 &&
 			document.querySelector("#passwordconfirm").value.length <= 64 &&
 			document.querySelector("#passwordconfirm").value == document.querySelector("#password").value) {
@@ -142,9 +142,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Check if all the required fields have been field and activate the signup button
 	toggle_signup_btn = () => {
 		if (username && first_name && last_name && email && password && passwordconfirm) {
-			document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark'>Sign Up</button>"
+			document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark'><i class='fas fa-user-plus'></i> Sign Up</button>"
 		} else {
-			document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark' disabled>Sign Up</button>"
+			document.querySelector(".signup_btn").innerHTML = "<button class='btn btn-dark' disabled><i class='fas fa-user-plus'></i> Sign Up</button>"
 		}
 	}
 });

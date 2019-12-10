@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
 																				<input type='number' id='order_id' value='"+button.dataset.order+"' disabled/>";
 						
 						if (JSON.parse(request.response)["status"] === "processing") {
-							document.querySelector("#orderdone").innerHTML = "<button type='button' class='btn btn-warning' onclick='orderdonebtn()' data-order='"+button.dataset.order+"'>DONE</button>";
+							document.querySelector("#orderdone").innerHTML = "<button type='button' class='btn btn-warning' onclick='orderdonebtn()' data-order='"+button.dataset.order+"'><i class='fas fa-check'></i> DONE</button>";
 						} else {
 							document.querySelector("#orderdone").innerHTML = "";
 						}

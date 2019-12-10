@@ -39,8 +39,8 @@
 								<p class="total float-right">Total:<span class="shown_total" id="total_{{pizza.pk}}">{{pizza.price|add:"120"}}</span> MZN</p>
 								<p class="price float-right">Price:<span class="shown_price" id="price_{{pizza.pk}}">{{pizza.price}}</span> MZN|-|</p>
 								<input name="pizza_id" value="{{pizza.pk}}" class="hide_item"/>
-								<button type="submit" class="btn add_to_cart btn-success float-right" data-pizza="{{pizza.pk}}">Add to Cart</button>
-								<button class="btn build_pizza btn-primary float-right">Build Pizza</button>
+								<button type="submit" class="btn add_to_cart btn-success float-right" data-pizza="{{pizza.pk}}"><i class="fas fa-cart-arrow-down"></i>Add to Cart</button>
+								<button class="btn build_pizza btn-primary float-right"><i class="fas fa-hammer"></i><i class="fas fa-pizza-slice"></i> Build Pizza</button>
 								<select name="pizza_size" id="pizza_size_{{pizza.pk}}" data-pizza="{{pizza.pk}}" class="form-control pizza_size float-right">
 									<option>S</option>
 									<option>M</option>

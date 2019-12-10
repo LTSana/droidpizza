@@ -47,7 +47,7 @@
 			<p class="information">Payment Details.</p>
 			<input type="number" id="pizza_quantity" class="form-control" placeholder="Quantity" max="20" min="1" required>
 			{% csrf_token %}
-			<p class="payment_items"><span class="back_color_box">TOTAL PRICE: <span id="total_value">0</span> MZN <button class="btn btn-primary add_to_cart">Add To Cart</button></span></p>
+			<p class="payment_items"><span class="back_color_box">TOTAL PRICE: <span id="total_value">0</span> MZN <button class="btn btn-primary add_to_cart"><i class="fas fa-cart-arrow-down"></i>Add To Cart</button></span></p>
 		</div>
 	</body>
 {% endblock %}
