@@ -60,10 +60,15 @@ def index(request):
         else:
             messages = "Please Login to add to cart."
 
+    if len(Cart.objects.filter(owner_id=request.user.pk, status="waiting")):
+        cart_n = len(Cart.objects.filter(owner_id=request.user.pk, status="waiting"))
+    else:
+        cart_n = 0
+
     html_content = {
         "pizzas": Pizza.objects.all(),
         "messages": messages,
-        "cart_items": len(Cart.objects.filter(owner_id=request.user.pk, status="waiting"))
+        "cart_items": cart_n
     }
     return render(request, "pizza/index.html", html_content)
 

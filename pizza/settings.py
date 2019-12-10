@@ -25,6 +25,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+ADMINS = (
+        ("LT.Sana", "snm.developer@gmail.com"),
+        )
+
 
 # Application definition
 
