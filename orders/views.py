@@ -66,8 +66,13 @@ def index(request):
     except:
         cart_n = 0
 
+    try:
+        pizza = Pizza.objects.all()
+    except:
+        pizza = ""
+
     html_content = {
-        "pizzas": Pizza.objects.all(),
+        "pizzas": pizza,
         "messages": messages,
         "cart_items": cart_n
     }
