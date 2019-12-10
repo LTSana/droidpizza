@@ -40,6 +40,8 @@
 								<button type="button" class="btn btn-danger" id="deniebtn" data-order="{{orders.pk}}">Denie Order</button>
 							</div>
 						</div>
+					{% elif orders.status != "waiting" and orders.status != "done" and orders.status != "denied" %}
+						<span class="badge badge_cart badge-secondary">No Waiting Orders.</span>
 					{% endif %}
 				{% endfor %}
 			</div>
@@ -62,6 +64,8 @@
 								
 							</div>
 						</div>
+					{% elif orders.status != "waiting" and orders.status != "done" and orders.status != "denied" %}
+						<span class="badge badge_cart badge-secondary">No Done Orders.</span>
 					{% endif %}
 				{% endfor %}
 			</div>
@@ -84,6 +88,8 @@
 								
 							</div>
 						</div>
+					{% elif orders.status != "waiting" and orders.status != "done" and orders.status != "denied" %}
+						<span class="badge badge_cart badge-secondary">No Denied Orders.</span>
 					{% endif %}
 				{% endfor %}
 			</div>

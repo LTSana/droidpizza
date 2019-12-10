@@ -56,7 +56,7 @@
 					</div>
 				{% endif %}
 			{% endfor %}
-			{% if not cart %}
+			{% if not cart_waiting %}
 				<span class="badge badge_cart badge-secondary">You Have No items in your waiting Cart.</span>
 			{% endif %}
 		</div>
@@ -88,7 +88,7 @@
 					</div>
 				{% endif %}
 			{% endfor %}
-			{% if not cart %}
+			{% if not cart_processing %}
 				<span class="badge badge_cart badge-secondary">You Have No items in your processing Cart.</span>
 			{% endif %}
 		</div>
@@ -122,7 +122,7 @@
 					</div>
 				{% endif %}
 			{% endfor %}
-			{% if not cart %}
+			{% if not cart_done %}
 				<span class="badge badge_cart badge-secondary">You Have No items in your done Cart.</span>
 			{% endif %}
 		</div>
@@ -154,7 +154,7 @@
 					</div>
 				{% endif %}
 			{% endfor %}
-			{% if not cart %}
+			{% if not cart_denied %}
 				<span class="badge badge_cart badge-secondary">You Have No items in your denied Cart.</span>
 			{% endif %}
 		</div>

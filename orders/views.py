@@ -499,7 +499,11 @@ def cart_page(request):
 
     elif request.method == "GET":
         html_content = {"cart": Cart.objects.filter(owner_id=request.user.pk),
-                        "cart_items": len(Cart.objects.filter(owner_id=request.user.pk, status="waiting"))}
+                        "cart_items": len(Cart.objects.filter(owner_id=request.user.pk, status="waiting")),
+                        "cart_waiting": len(Cart.objects.filter(owner_id=request.user.pk, status="waiting")),
+                        "cart_processing": len(Cart.objects.filter(owner_id=request.user.pk, status="processing")),
+                        "cart_done": len(Cart.objects.filter(owner_id=request.user.pk, status="done")),
+                        "cart_denied": len(Cart.objects.filter(owner_id=request.user.pk, status="denied"))}
 
         return render(request, "pizza/cart.html", html_content)
 
