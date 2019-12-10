@@ -135,9 +135,5 @@ CACHES = {
 # For image uploading settings
 MEDIA_ROOT = os.path.join(BASE_DIR, "static/pizza/img/topping_img")
 
-import dj_database_url 
-prod_db  =  dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(prod_db)
-
 # Set up Heroku settings
 django_heroku.settings(locals())
