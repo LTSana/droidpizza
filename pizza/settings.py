@@ -129,13 +129,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-# This is for caching settings
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-    }
-}
-
 # For image uploading settings
 MEDIA_ROOT = os.path.join(BASE_DIR, "static/pizza/img/topping_img")
 
