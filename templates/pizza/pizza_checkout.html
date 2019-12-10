@@ -39,11 +39,12 @@
 								<button type="button" class="btn btn-primary" id="viewbtn" data-order="{{orders.pk}}" data-toggle="modal" data-target="#orderdetails">View Order</button>
 								<button type="button" class="btn btn-danger" id="deniebtn" data-order="{{orders.pk}}">Denie Order</button>
 							</div>
-						</div>
-					{% elif orders.status != "waiting" and orders.status != "done" and orders.status != "denied" %}
-						<span class="badge badge_cart badge-secondary">No Waiting Orders.</span>
+						</div>						
 					{% endif %}
 				{% endfor %}
+				{% if not order_waiting %}
+					<span class="badge badge_cart badge-secondary">No Waiting Orders.</span>
+				{% endif %}
 			</div>
 		</div>
 		<div class="tab-pane fade" id="done" role="tabpanel" aria-labelledby="done-tab">
@@ -63,11 +64,12 @@
 								<button type="button" class="btn btn-primary" id="viewbtn" data-order="{{orders.pk}}" data-toggle="modal" data-target="#orderdetails">View Order</button>
 								
 							</div>
-						</div>
-					{% elif orders.status != "waiting" and orders.status != "done" and orders.status != "denied" %}
-						<span class="badge badge_cart badge-secondary">No Done Orders.</span>
+						</div>	
 					{% endif %}
 				{% endfor %}
+				{% if not order_done %}
+					<span class="badge badge_cart badge-secondary">No Done Orders.</span>
+				{% endif %}
 			</div>
 		</div>
 		<div class="tab-pane fade" id="denied" role="tabpanel" aria-labelledby="denied-tab">
@@ -87,11 +89,12 @@
 								<button type="button" class="btn btn-primary" id="viewbtn" data-order="{{orders.pk}}" data-toggle="modal" data-target="#orderdetails">View Order</button>
 								
 							</div>
-						</div>
-					{% elif orders.status != "waiting" and orders.status != "done" and orders.status != "denied" %}
-						<span class="badge badge_cart badge-secondary">No Denied Orders.</span>
+						</div>	
 					{% endif %}
 				{% endfor %}
+				{% if not order_denied %}
+					<span class="badge badge_cart badge-secondary">No Denied Orders.</span>
+				{% endif %}
 			</div>
 		</div>
 	</div>

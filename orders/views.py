@@ -553,7 +553,10 @@ def pizza_checkout_staff(request):
         return HttpResponseRedirect(reverse("login"))
 
     html_content = {"cart_items": len(Cart.objects.filter(owner_id=request.user.pk, status="waiting")),
-                    "order": Pizza_order.objects.all()}
+                    "order": Pizza_order.objects.all(),
+                    "order_waiting": len(Pizza_order.objects.filter(status="waiting")),
+                    "order_done": len(Pizza_order.objects.filter(status="done")),
+                    "order_denied": len(Pizza_order.objects.filter(status="denied"))}
 
     return render(request, "pizza/pizza_checkout.html", html_content)
 
