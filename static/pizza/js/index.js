@@ -21,9 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 
 			if (!document.querySelector("#quantity_"+quantity.dataset.pizza).value) {
-				sum = price * 1 + size;
+				sum = (parseInt(price) + parseInt(size)) * 1;
 			} else {
-				sum = price * document.querySelector("#quantity_"+quantity.dataset.pizza).value + size;
+				sum = (parseInt(price) + parseInt(size)) * document.querySelector("#quantity_"+quantity.dataset.pizza).value;
 			}
 
 			document.querySelector("#total_"+quantity.dataset.pizza).innerHTML = sum;
@@ -49,9 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 
 			if (!document.querySelector("#quantity_"+pizza_size.dataset.pizza).value) {
-				sum = price * 1 + size;
+				sum = (parseInt(price) + parseInt(size)) * 1;
 			} else {
-				sum = price * document.querySelector("#quantity_"+pizza_size.dataset.pizza).value + size;
+				sum = (parseInt(price) + parseInt(size)) * document.querySelector("#quantity_"+pizza_size.dataset.pizza).value;
 			}
 
 			document.querySelector("#total_"+pizza_size.dataset.pizza).innerHTML = sum;

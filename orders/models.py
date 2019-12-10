@@ -9,7 +9,7 @@ class Pizza(models.Model):
 	available = models.CharField(max_length=64, default="YES")
 	topping = models.IntegerField(null=False, default=0)
 	ingredients = models.CharField(max_length=900, default="")
-	price = models.FloatField(default=0.00)
+	price = models.IntegerField(default=0)
 
 	def __str__(self):
 		return f"Pizza: {self.name} Image: {self.img} Available: {self.available} Topping: {self.topping} Ingredients: {self.ingredients} Price: {self.price}"
