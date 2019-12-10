@@ -65,9 +65,9 @@ def index(request):
         cart_n = len(Cart.objects.filter(owner_id=request.user.pk, status="waiting"))
     except:
         cart_n = 0
-
+    print(Pizza.objects.all())
     html_content = {
-        "pizzas": Pizza.objects.all(),
+        "pizzas": "",
         "messages": messages,
         "cart_items": cart_n
     }
