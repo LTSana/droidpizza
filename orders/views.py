@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
+from django.core.mail import send_mail
 
 import os
 
@@ -76,6 +77,7 @@ def index(request):
         "messages": messages,
         "cart_items": cart_n
     }
+
     return render(request, "pizza/index.html", html_content)
 
 def register(request):
@@ -541,6 +543,15 @@ def cart_checkout(request):
 
         Cart.objects.filter(pk=cart_id).update(status="processing")
 
+        f = User.objects.get(pk=Cart.objects.get(pk=cart_id).owner_id)
+
+        send_mail("Droid Pizza Order",
+                    "Your order is now in process. <br> Order ID:"+str(cart_id),
+                    os.getenv("EMAIL"),
+                    [f.email],
+                    fail_silently=False,
+                    html_message="<h3>Thank You for checking out.</h3> <br> Your order is now in process. <br> Order ID:"+str(cart_id))
+
         return JsonResponse({"STATUS": "SUCCESS"})
 
     return JsonResponse({"STATUS": "FAILED"})
@@ -588,12 +599,33 @@ def pizzaorder(request, option):
                 Cart.objects.filter(pk=int(Pizza_order.objects.get(pk=int(request.POST["order_id"])).cart_id)).update(status="denied")
                 Pizza_order.objects.filter(pk=int(request.POST["order_id"])).update(status="denied")
 
+                Cart.objects.filter(pk=int(Pizza_order.objects.get(pk=int(request.POST["order_id"])).cart_id)).update(status="done")
+                Pizza_order.objects.filter(pk=int(request.POST["order_id"])).update(status="done")
+
+                f = User.objects.get(pk=Cart.objects.get(pk=int(Pizza_order.objects.get(pk=int(request.POST["order_id"])).cart_id)).owner_id)
+
+                send_mail("Droid Pizza Order",
+                            "Your order has been Denied. <br> Order ID:"+str(request.POST["order_id"]),
+                            os.getenv("EMAIL"),
+                            [f.email],
+                            fail_silently=False,
+                            html_message="<h3>Sorry Something happened with your Order.</h3> <br> Your order has been Denied. <br> Order ID:"+str(request.POST["order_id"]))
+
                 return JsonResponse({"STATUS": "SUCCESS"})
 
             elif option == "done": # Make the order done
 
                 Cart.objects.filter(pk=int(Pizza_order.objects.get(pk=int(request.POST["order_id"])).cart_id)).update(status="done")
                 Pizza_order.objects.filter(pk=int(request.POST["order_id"])).update(status="done")
+
+                f = User.objects.get(pk=Cart.objects.get(pk=int(Pizza_order.objects.get(pk=int(request.POST["order_id"])).cart_id)).owner_id)
+
+                send_mail("Droid Pizza Order",
+                            "Your order is Done. <br> Order ID:"+str(request.POST["order_id"]),
+                            os.getenv("EMAIL"),
+                            [f.email],
+                            fail_silently=False,
+                            html_message="<h3>Thank You For Buying Pizza With Us.</h3> <br> Your order is Done. <br> Order ID:"+str(request.POST["order_id"]))
 
                 return JsonResponse({"STATUS": "SUCCESS"})
         else:
