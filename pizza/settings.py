@@ -151,8 +151,3 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = os.getenv("EMAIL")
 EMAIL_HOST_PASSWORD = os.getenv("E_PWD")
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-if os.getenv("EMAIL"):
-    print(os.getenv("EMAIL"))
-if os.getenv("E_PWD"):
-    print(os.getenv("E_PWD"))
