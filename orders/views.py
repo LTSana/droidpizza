@@ -546,11 +546,11 @@ def cart_checkout(request):
         f = User.objects.get(pk=Cart.objects.get(pk=cart_id).owner_id)
 
         send_mail("Droid Pizza Order",
-                    "Your order is now in process. <br> Order ID:"+str(cart_id),
+                    "Your order is now in process. <br> Cart ID:"+str(cart_id),
                     os.getenv("EMAIL"),
                     [f.email],
                     fail_silently=False,
-                    html_message="<h3>Thank You for checking out.</h3> <br> Your order is now in process. <br> Order ID:"+str(cart_id))
+                    html_message="<h3>Thank You for checking out.</h3> <br> Your order is now in process. <br> Cart ID:"+str(cart_id))
 
         return JsonResponse({"STATUS": "SUCCESS"})
 

@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					if (request.status === 200 && request.readyState === 4) {
 						if (JSON.parse(request.response)["STATUS"] === "SUCCESS") {
 							alert("Successfully Denied Order");
+							location.reload();
 						}
 					}
 				}
@@ -73,6 +74,7 @@ orderdonebtn = () => {
 		request.onreadystatechange = () => {
 			if (request.status === 200 && request.readyState === 4) {
 				alert("Order is Done!");
+				location.reload();
 			}
 		}
 	}

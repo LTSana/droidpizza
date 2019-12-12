@@ -145,9 +145,14 @@ django_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
 
 # Credidentials for email
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
-EMAIL_HOST_USER = os.getenv("EMAIL")
-EMAIL_HOST_PASSWORD = os.getenv("E_PWD")
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+SENDGRID_SANDBOX_MODE_IN_DEBUG=False # Toggle sandbox mode (when running in DEBUG mode)
+
+# This is only good for local use (DEBUG Has To Be On. Do not use in Production)
+#EMAIL_HOST = "smtp.gmail.com"
+#EMAIL_PORT = 465
+#EMAIL_USE_SSL = True
+#EMAIL_HOST_USER = os.getenv("EMAIL")
+#EMAIL_HOST_PASSWORD = os.getenv("E_PWD")
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
