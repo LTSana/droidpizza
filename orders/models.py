@@ -30,7 +30,7 @@ class Cart(models.Model):
 	size = models.CharField(max_length=12, null=False)
 	crust = models.CharField(max_length=12, null=False)
 	toppings = models.IntegerField(null=False)
-	selected_toppings = models.CharField(max_length=90, null=False)
+	selected_toppings = models.CharField(max_length=600, null=False)
 	quantity = models.IntegerField(null=False, default=0)
 	total_value = models.IntegerField(null=False)
 	total_value_Q = models.IntegerField(null=False, default=0)
