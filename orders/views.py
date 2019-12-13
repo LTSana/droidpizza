@@ -130,6 +130,13 @@ def register(request):
                                         last_name=last_name,
                                         password=password)
             f.save()
+            send_mail("Droid Pizza",
+                        "Thank You For Registering at Droid Pizza. Now you can order as many pizza's you want :D.",
+                        os.getenv("EMAIL"),
+                        [f.email],
+                        fail_silently=False,
+                        html_message="<h3>Thank You For Registering at Droid Pizza.</h3> <br> Now you can order as many pizza's you want :D.")
+
         return HttpResponseRedirect(reverse("index"))
 
 
