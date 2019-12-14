@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	document.querySelectorAll("#checkout_button").forEach( button => {
 		
 		button.onclick = () => {
-			var address = prompt("Add FAKE address please.")
+			var address = prompt("Add FAKE street address please.")
 			if (address) {
 				if (button.dataset.cart) {
 					const request = new XMLHttpRequest();

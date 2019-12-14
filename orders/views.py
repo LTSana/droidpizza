@@ -19,11 +19,13 @@ def index(request):
     if request.method == "POST":
 
         if request.user.is_authenticated:
-
+            
+            # Get the pizza ID, SIze and quantity being requested to put in the cart
             pizza_id = int(request.POST["pizza_id"])
             pizza_size = str(request.POST["pizza_size"])
             quantity = int(request.POST["quantity"])
 
+            # Replace the single letter with the full word in lower case
             if pizza_size == "S":
                 pizza_size = "small"
             elif pizza_size == "M":
@@ -31,19 +33,26 @@ def index(request):
             elif pizza_size == "L":
                 pizza_size = "large"
             else:
+                # If the letter does not match any of the valid ones reload the page and don't tell why
                 return HttpResponseRedirect(reverse("index"))
 
+            # Check if the quantity being requested is valid
             if quantity > 0 and quantity < 21:
+
+                # Get the information about the Pizza from the Database
                 f =  Pizza.objects.get(pk=pizza_id)
-                total_value_Q = f.price * quantity
 
+                # Get the value added by each size of the pizza
                 if pizza_size == "small":
-                    total_value_Q += 120
+                    value_S += 120
                 elif pizza_size == "medium":
-                    total_value_Q += 160
+                    value_S += 160
                 elif pizza_size == "large":
-                    total_value_Q += 200
+                    value_S += 200
 
+                total_value_Q = (f.price + value_S) * quantity # Muiltiply the price + value Size by the quantity
+
+                # Add the order to the Cart
                 q = Cart(owner_id = int(request.user.pk),
                         size = pizza_size,
                         crust = "small",
@@ -52,7 +61,7 @@ def index(request):
                         quantity = quantity,
                         total_value = f.price,
                         total_value_Q = total_value_Q)
-                q.save()
+                q.save() # Save it to the Database
 
                 messages = "Successfully added to cart."
             else:
@@ -146,6 +155,7 @@ def check_signup(request, check):
     # Make sure method is POST
     if request.method == "POST":
 
+        # Check if the username already exist in the Database
         if check == "checkusername":
             username = str(request.POST["username"])
             try:
@@ -153,6 +163,8 @@ def check_signup(request, check):
                 return JsonResponse({"USERNAME_STATUS": "BAD"})
             except User.DoesNotExist:
                 return JsonResponse({"USERNAME_STATUS": "GOOD"})
+
+        # Check if the email address is already in use in the Database
         elif check == "checkemail":
             email = str(request.POST["email"])
             try:
@@ -301,17 +313,17 @@ def switch_toggle_topping(request):
     """Used for topping available"""
 
     if request.method == "POST":
-        if request.user.is_staff:
+        if request.user.is_staff: # Check if user is Staff
 
+            # Get Topping information
             f = Topping.objects.get(pk=int(request.POST["topping_id"]))
 
             if f:
+                # Check if the Topping is available or not and switch the toggle from OFF to ON depending on the available status
                 if str(f.available) == "OFF":
                     Topping.objects.filter(pk=int(request.POST["topping_id"])).update(available="ON")
                 elif str(f.available) == "ON":
                     Topping.objects.filter(pk=int(request.POST["topping_id"])).update(available="OFF")
-
-            f = Topping.objects.get(pk=int(request.POST["topping_id"]))
 
             return JsonResponse({"STATUS": True})
         else:
@@ -356,7 +368,7 @@ def login_page(request):
 
         # Check if the user credentials are valid and log them in
         if user:
-            login(request, user)
+            login(request, user) # Login the user
             return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "pizza/login.html", {"message": "Invalid password/username."})
@@ -378,11 +390,13 @@ def build_pizza(request):
 
         if request.user.is_authenticated:
             
-            user_info = int(request.user.pk)
-            size = str(request.POST["pizza_size"])
-            crust = str(request.POST["pizza_crust"])
-            number_toppings = int(request.POST["number_toppings"])
+            user_info = int(request.user.pk) # GEt the users primary key
+            size = str(request.POST["pizza_size"]) # Get the Pizza Size
+            crust = str(request.POST["pizza_crust"]) # Get the Crust Size
+            number_toppings = int(request.POST["number_toppings"]) # Get the amount of toppings wanted (min=1, max=3)
             
+            # Get the topping primary key
+            # ---------------------------------------------------------------------------------------------
             if request.POST["pizza_topping_1"] and request.POST["pizza_topping_1"] != "undefined":
                 topping_1 = int(request.POST["pizza_topping_1"])
             else:
@@ -397,10 +411,11 @@ def build_pizza(request):
                 topping_3 = int(request.POST["pizza_topping_3"])
             else:
                 topping_3 = None
+            # ---------------------------------------------------------------------------------------------
             
-            quantity = int(request.POST["quantity"])
-            total_value = int(request.POST["total_value"])
-            total_value_Q = int(request.POST["total_value_Q"])
+            quantity = int(request.POST["quantity"]) # Get the quantity
+            total_value = int(request.POST["total_value"]) # Get the static price
+            total_value_Q = int(request.POST["total_value_Q"]) # Get the total price
             total_value_check = 0
 
             if size == "small":
@@ -553,11 +568,11 @@ def cart_checkout(request):
         f = User.objects.get(pk=Cart.objects.get(pk=cart_id).owner_id)
 
         send_mail("Droid Pizza Order",
-                    "Your order is now in process. <br> Cart ID:"+str(cart_id),
+                    "Your order is now in process. <br> Cart ID:"+str(cart_id)+" Please do not reply to this email.",
                     os.getenv("EMAIL"),
                     [f.email],
                     fail_silently=False,
-                    html_message="<h3>Thank You for checking out.</h3> <br> Your order is now in process. <br> Cart ID:"+str(cart_id))
+                    html_message="<h3>Thank You for checking out.</h3> <br> Your order is now in process. <br> Cart ID:"+str(cart_id)+"<br><small class='text-muted'>Please do not reply to this email</small>")
 
         return JsonResponse({"STATUS": "SUCCESS"})
 
@@ -606,17 +621,14 @@ def pizzaorder(request, option):
                 Cart.objects.filter(pk=int(Pizza_order.objects.get(pk=int(request.POST["order_id"])).cart_id)).update(status="denied")
                 Pizza_order.objects.filter(pk=int(request.POST["order_id"])).update(status="denied")
 
-                Cart.objects.filter(pk=int(Pizza_order.objects.get(pk=int(request.POST["order_id"])).cart_id)).update(status="done")
-                Pizza_order.objects.filter(pk=int(request.POST["order_id"])).update(status="done")
-
+                # Get the user's email and send an email
                 f = User.objects.get(pk=Cart.objects.get(pk=int(Pizza_order.objects.get(pk=int(request.POST["order_id"])).cart_id)).owner_id)
-
                 send_mail("Droid Pizza Order",
-                            "Your order has been Denied. <br> Order ID:"+str(request.POST["order_id"]),
+                            "Your order has been Denied. <br> Order ID:"+str(request.POST["order_id"])+" Please do not reply to this email.",
                             os.getenv("EMAIL"),
                             [f.email],
                             fail_silently=False,
-                            html_message="<h3>Sorry Something happened with your Order.</h3> <br> Your order has been Denied. <br> Order ID:"+str(request.POST["order_id"]))
+                            html_message="<h3>Sorry Something happened with your Order.</h3> <br> Your order has been Denied. <br> Order ID:"+str(request.POST["order_id"])+"<br><small class='text-muted'>Please do not reply to this email</small>")
 
                 return JsonResponse({"STATUS": "SUCCESS"})
 
@@ -625,14 +637,14 @@ def pizzaorder(request, option):
                 Cart.objects.filter(pk=int(Pizza_order.objects.get(pk=int(request.POST["order_id"])).cart_id)).update(status="done")
                 Pizza_order.objects.filter(pk=int(request.POST["order_id"])).update(status="done")
 
+                # Get the user's email and send an email
                 f = User.objects.get(pk=Cart.objects.get(pk=int(Pizza_order.objects.get(pk=int(request.POST["order_id"])).cart_id)).owner_id)
-
                 send_mail("Droid Pizza Order",
-                            "Your order is Done. <br> Order ID:"+str(request.POST["order_id"]),
+                            "Your order is Done. <br> Order ID:"+str(request.POST["order_id"])+" Please do not reply to this email.",
                             os.getenv("EMAIL"),
                             [f.email],
                             fail_silently=False,
-                            html_message="<h3>Thank You For Buying Pizza With Us.</h3> <br> Your order is Done. <br> Order ID:"+str(request.POST["order_id"]))
+                            html_message="<h3>Thank You For Buying Pizza With Us.</h3> <br> Your order is Done. <br> Order ID:"+str(request.POST["order_id"])+"<br><small class='text-muted'>Please do not reply to this email</small>")
 
                 return JsonResponse({"STATUS": "SUCCESS"})
         else:
